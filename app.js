@@ -1,5 +1,6 @@
 "use strict";
 
+// Get references to the form and the fields that need validation.
 const form = document.getElementById("registrationForm");
 const fullName = document.getElementById("fullName");
 const course = document.getElementById("course");
@@ -9,6 +10,7 @@ const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
 const feedback = document.getElementById("feedback");
 
+// Populate the workshop dropdown with a small list of available options.
 const workshops = ["HTML Essentials", "CSS Studio", "JavaScript Lab"];
 
 for (const workshop of workshops) {
@@ -18,6 +20,7 @@ for (const workshop of workshops) {
   course.append(option);
 }
 
+// Return today's date in YYYY-MM-DD format so the date input cannot select past dates.
 function todayInLocalTime() {
   const now = new Date();
   const year = now.getFullYear();
@@ -28,6 +31,7 @@ function todayInLocalTime() {
 
 sessionDate.min = todayInLocalTime();
 
+// Validate the form when the user submits it and show a status message.
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   form.classList.add("was-validated");
@@ -60,6 +64,7 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
+  // Determine whether the booking is for one person or a group.
   const seatCount = seats.valueAsNumber;
   let bookingType = "";
 
@@ -74,6 +79,7 @@ form.addEventListener("submit", (event) => {
   feedback.hidden = false;
 });
 
+// Clear any previous validation errors as the user types.
 form.addEventListener("input", (event) => {
   feedback.hidden = true;
   feedback.className = "feedback";
